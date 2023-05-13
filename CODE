@@ -1,0 +1,14 @@
+
+import pyttsx3
+import PyPDF2
+
+hikaye = open("management-basics.pdf","rb")
+pdfokuyucu=PyPDF2.PdfFileReader(hikaye)
+engine=pyttsx3.init()
+voices=engine.getProperty('voices')
+engine.setProperty('voice',voices[0].id)
+for sayfa_numarasi in range(0,pdfokuyucu.numPages):
+    sayfa=pdfokuyucu.getPage(sayfa_numarasi)
+    yazi=sayfa.extractText()
+    engine.say(yazi)
+    engine.runAndWait()
